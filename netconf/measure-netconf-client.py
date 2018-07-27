@@ -8,12 +8,12 @@ except ImportError:
 
 _Username = 'srv6'
 _Password = 'srv6'
-_ServerIP = "127.0.0.1"
-_Device = 'enp0s25'
+_ServerIP = "192.168.1.2"#"127.0.0.1"
+_Device = "enp5s0"#'enp0s25'
 _Prefix = ''
 _Segments = '2000::1e'
-_NumberOfRuleToBeEnforced = 2
-_N_Experiment = 3
+_NumberOfRuleToBeEnforced = 100
+_N_Experiment = 20
 _Port = 830
 
 # Utility to close Netconf sessions

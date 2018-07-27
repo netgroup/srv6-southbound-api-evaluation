@@ -5,8 +5,8 @@ import json,psutil,time
 # Global variables
 _Username = 'srv6'
 _Password = 'srv6'
-_ServerIP = "127.0.0.1"
-_Device = 'enp0s25'
+_ServerIP = "192.168.1.2"#"127.0.0.1"
+_Device = "enp5s0"#'enp0s25'
 _Prefix = ''
 _Segments = '2000::1e'
 _NumberOfRuleToBeEnforced = 100
@@ -64,9 +64,17 @@ def add(communicationType):
 		data = """
 			{
 			  "paths": [
-			 """
+			 	{
+			      "device": "%s",
+			      "destination": "%s",
+			      "encapmode": "inline",
+			      "segments": [
+			        "%s"
+			      ]
+			    }
+			""" %(_Device,_Prefix+str(1)+'/128',_Segments)
 		for i in range(2,_NumberOfRuleToBeEnforced+1):
-			data += """{
+			data += """,{
 			      "device": "%s",
 			      "destination": "%s",
 			      "encapmode": "inline",
@@ -139,9 +147,17 @@ def delete(communicationType):
 		data = """
 			{
 			  "paths": [
-			 """
+			 	{
+			      "device": "%s",
+			      "destination": "%s",
+			      "encapmode": "inline",
+			      "segments": [
+			        "%s"
+			      ]
+			    }
+			""" %(_Device,_Prefix+str(1)+'/128',_Segments)
 		for i in range(2,_NumberOfRuleToBeEnforced+1):
-			data += """{
+			data += """,{
 			      "device": "%s",
 			      "destination": "%s",
 			      "encapmode": "inline",
@@ -185,7 +201,7 @@ def delete(communicationType):
 		session.close()
 
 if __name__ == '__main__':
-    f1 = open('NetConf20.txt','a+')
+    f1 = open('REST20.txt','a+')
     #Add Operation
     for i in range(1,_N_Experiment+1):
         _Prefix = str(2000+i) + '::'
@@ -197,11 +213,11 @@ if __name__ == '__main__':
         executionTime=time.time() - start_time
         SystemCPUUsage = psutil.cpu_percent(interval=None, percpu=False)*executionTime
 
-        print("non persistent sequential, netconf, Add "+str(i))
+        print("non persistent sequential, rest, Add "+str(i))
         print("Execution time: " + str(executionTime))
         print("System-wide CPU Usage: " + str(SystemCPUUsage))
 
-        f1.write('non persistent sequential, netconf, add:\n')
+        f1.write('non persistent sequential, rest, add:\n')
         f1.write(str(executionTime) + '\n')
         f1.write(str(SystemCPUUsage) + '\n')
 
@@ -215,11 +231,11 @@ if __name__ == '__main__':
         executionTime=time.time() - start_time
         SystemCPUUsage = psutil.cpu_percent(interval=None, percpu=False)*executionTime
 
-        print("non persistent sequential, netconf, del "+str(i))
+        print("non persistent sequential, rest, del "+str(i))
         print("Execution time: " + str(executionTime))
         print("System-wide CPU Usage: " + str(SystemCPUUsage))
 
-        f1.write('non persistent sequential, netconf, del:\n')
+        f1.write('non persistent sequential, rest, del:\n')
         f1.write(str(executionTime) + '\n')
         f1.write(str(SystemCPUUsage) + '\n')
 
@@ -233,11 +249,11 @@ if __name__ == '__main__':
         executionTime=time.time() - start_time
         SystemCPUUsage = psutil.cpu_percent(interval=None, percpu=False)*executionTime
 
-        print("non persistent bulk, netconf, Add "+str(i))
+        print("non persistent bulk, rest, Add "+str(i))
         print("Execution time: " + str(executionTime))
         print("System-wide CPU Usage: " + str(SystemCPUUsage))
 
-        f1.write('non persistent bulk, netconf, add:\n')
+        f1.write('non persistent bulk, rest, add:\n')
         f1.write(str(executionTime) + '\n')
         f1.write(str(SystemCPUUsage) + '\n')
 
@@ -251,11 +267,11 @@ if __name__ == '__main__':
         executionTime=time.time() - start_time
         SystemCPUUsage = psutil.cpu_percent(interval=None, percpu=False)*executionTime
 
-        print("non persistent bulk, netconf, del "+str(i))
+        print("non persistent bulk, rest, del "+str(i))
         print("Execution time: " + str(executionTime))
         print("System-wide CPU Usage: " + str(SystemCPUUsage))
 
-        f1.write('non persistent bulk, netconf, del:\n')
+        f1.write('non persistent bulk, rest, del:\n')
         f1.write(str(executionTime) + '\n')
         f1.write(str(SystemCPUUsage) + '\n')
 
@@ -269,11 +285,11 @@ if __name__ == '__main__':
         executionTime=time.time() - start_time
         SystemCPUUsage = psutil.cpu_percent(interval=None, percpu=False)*executionTime
 
-        print("persistent Conncection, netconf, Add "+str(i))
+        print("persistent Conncection, rest, Add "+str(i))
         print("Execution time: " + str(executionTime))
         print("System-wide CPU Usage: " + str(SystemCPUUsage))
 
-        f1.write('persistent Conncection, netconf, add:\n')
+        f1.write('persistent Conncection, rest, add:\n')
         f1.write(str(executionTime) + '\n')
         f1.write(str(SystemCPUUsage) + '\n')
 
@@ -287,10 +303,10 @@ if __name__ == '__main__':
         executionTime=time.time() - start_time
         SystemCPUUsage = psutil.cpu_percent(interval=None, percpu=False)*executionTime
 
-        print("persistent Conncection, netconf, del "+str(i))
+        print("persistent Conncection, rest, del "+str(i))
         print("Execution time: " + str(executionTime))
         print("System-wide CPU Usage: " + str(SystemCPUUsage))
 
-        f1.write('persistent Conncection, netconf, del:\n')
+        f1.write('persistent Conncection, rest, del:\n')
         f1.write(str(executionTime) + '\n')
         f1.write(str(SystemCPUUsage) + '\n')
