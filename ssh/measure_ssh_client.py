@@ -6,12 +6,12 @@ from sshutil.host import Host
 
 _Username = 'srv6'
 _Password = 'srv6'
-_ServerIP = "127.0.0.1"
-_Device = 'enp0s25'
+_ServerIP = "192.168.1.2"#"127.0.0.1"
+_Device = "enp5s0"#'enp0s25'
 _Prefix = ''
 _Segments = '2000::1e'
-_NumberOfRuleToBeEnforced = 2
-_N_Experiment = 3
+_NumberOfRuleToBeEnforced = 100
+_N_Experiment = 20
 _port = 220
 
 def SSHCommand_add(communicationType):
@@ -72,23 +72,7 @@ def SSHCommand_delete(communicationType):
         # Close the session
         remoteCmd.close()
         # Flush the cache 
-        remoteCmd.cache.flush()
-
-"""def Host_add(communicationType):
-    if communicationType == "Persistent Conncection":
-        host = Host(server=_ServerIP, port=_port, username=_Username, password=_Password)
-        for i in range(1,int(_NumberOfRuleToBeEnforced)+1):
-            cmd = "ip -6 route add "+_Prefix+str(i)+'/128'+" encap seg6 mode encap segs "+ _Segments+" dev "+_Device
-            host.run(cmd)    
-
-def Host_delete(communicationType):
-    if communicationType == "Persistent Conncection":
-        host = Host(server=_ServerIP, port=_port, username=_Username, password=_Password)
-        for i in range(1,int(_NumberOfRuleToBeEnforced)+1):
-            cmd = "ip -6 route del "+_Prefix+str(i)+'/128'+" dev "+_Device
-            host.run(cmd)   
-            host.SSHClientSession.
-"""    
+        remoteCmd.cache.flush()   
 
 if __name__ == '__main__':
     f1 = open('SSH20.txt','a+')
