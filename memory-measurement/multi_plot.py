@@ -4,12 +4,7 @@
 # This is a simple script to plot memory usage/allocation trends based on the periodical snapshots of
 # /proc/meminfo and /proc/slabinfo.
 #
-# Usage:
-#   memleak_plot.py -f <memory_monitor_output_file>
-#
-# For more details, please refer to:
-#   http://www.bo-yang.net/2015/03/30/debug-kernel-space-memory-leak
-#
+
 
 import os
 import sys
