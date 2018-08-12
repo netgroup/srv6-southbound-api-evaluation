@@ -32,6 +32,8 @@ def run_system(cmd):
 
 
 def draw_unreclaim(f,fName,g,gName,pruneMode):
+    plt.rcParams.update({'font.size': 19})
+
     MemFreeF = run_system("grep MemFree %s | awk '{print $2}'" %f)
     MemFreeF = np.asarray(MemFreeF, dtype=int) / 1024 # MB
     
@@ -63,11 +65,14 @@ def draw_unreclaim(f,fName,g,gName,pruneMode):
     #ax1.plot(x, MemFreeG, 'b', label=gName)
     ax1.set_xlabel('time (s)')
     # Make the y-axis label and tick labels match the line color.
-    ax1.set_ylabel('MemFree (MB)', color='r')
-    for tl in ax1.get_yticklabels():
-        tl.set_color('r')
-    plt.legend(loc='upper center')
+    #ax1.set_ylabel('MemFree (MB)', color='r')
+    #for tl in ax1.get_yticklabels():
+    #    tl.set_color('r')
+
+    #plt.legend(loc='upper center')
+    plt.legend()
     ax1.grid(True)
+    fig.tight_layout()
     plt.show()
 """
     ax2 = ax1.twinx() # draw two scales in one plot
@@ -84,5 +89,6 @@ def draw_unreclaim(f,fName,g,gName,pruneMode):
 
 
 if __name__ == '__main__':
-    draw_unreclaim("add-grpc.dat","gRPC","add-rest.dat","REST","Prune")
-    draw_unreclaim("add-netconf.dat","netconf","add-ssh.dat","SSH","Not Prune")
+    draw_unreclaim("protocols/add-grpc.dat","gRPC","protocols/add-rest.dat","REST","Prune")
+    draw_unreclaim("protocols/add-netconf.dat","NETCONF","protocols/add-ssh.dat","SSH","Not Prune")
+    draw_unreclaim("LRE/Pyroute2_1Exp.dat","Pyroute2","LRE/Shell_1Exp.dat","Shell","Prune")
