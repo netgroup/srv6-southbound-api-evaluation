@@ -2,11 +2,15 @@
 import requests
 import json,psutil,time
 
+import urllib3
+
+urllib3.disable_warnings()
+
 # Global variables
 _Username = 'srv6'
 _Password = 'srv6'
-_ServerIP = "192.168.1.2"#"127.0.0.1"
-_Device = "enp5s0"#'enp0s25'
+_ServerIP = "dell-Inspiron-N5110"#"192.168.1.2"#"127.0.0.1"#"192.168.1.2"
+_Device = "enp5s0"#'enp0s25'#"enp5s0"
 _Prefix = ''
 _Segments = '2000::1e'
 _NumberOfRuleToBeEnforced = 100
@@ -19,9 +23,9 @@ ACCEPT = "application/json"
 CONTENT_TYPE = "application/json"
 POST = "POST"
 # Define wheter to use HTTP or HTTPS
-SECURE = False
+SECURE = True
 # SSL cerificate for server validation
-CERTIFICATE = 'cert_client.pem'
+CERTIFICATE = 'server.crt'
 
 # Build an http requests object
 def get_http_requests(ip_address, port, secure, params, data):

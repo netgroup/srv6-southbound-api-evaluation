@@ -31,7 +31,9 @@ def run_system(cmd):
         return None
 
 
-def draw_unreclaim(f,fName,g,gName,pruneMode):
+def draw_unreclaim(f,fName,g,gName,pruneMode,max_time=0):
+    plt.rcParams.update({'font.size': 19})
+
     MemFreeF = run_system("grep MemFree %s | awk '{print $2}'" %f)
     MemFreeF = np.asarray(MemFreeF, dtype=int) / 1024 # MB
     
@@ -39,6 +41,7 @@ def draw_unreclaim(f,fName,g,gName,pruneMode):
     MemFreeG = np.asarray(MemFreeG, dtype=int) / 1024 # MB
 
     minLen=min(len(MemFreeG), len(MemFreeF))
+
 
     diffMemFree = abs(MemFreeF[0] - MemFreeG[0])
     if MemFreeG[0] < MemFreeF[0]:
@@ -51,10 +54,16 @@ def draw_unreclaim(f,fName,g,gName,pruneMode):
     fig,ax1 = plt.subplots()
 
     if pruneMode == "Not Prune":
-        xF = np.arange(0,len(MemFreeF)/2.0,0.5)
-        xG = np.arange(0,len(MemFreeG)/2.0,0.5)
-        ax1.plot(xF, MemFreeF, 'r', label=fName)
-        ax1.plot(xG, MemFreeG, 'b', label=gName)
+    	if max_time==0:
+	        xF = np.arange(0,len(MemFreeF)/2.0,0.5)
+	        xG = np.arange(0,len(MemFreeG)/2.0,0.5)
+	        ax1.plot(xF, MemFreeF, 'r', label=fName)
+	        ax1.plot(xG, MemFreeG, 'b', label=gName)
+    	else:
+	        xF = np.arange(0,min(2*max_time,len(MemFreeF))/2.0,0.5)
+	        xG = np.arange(0,min(2*max_time,len(MemFreeG))/2.0,0.5)
+	        ax1.plot(xF, MemFreeF[0:min(int(2*max_time),len(MemFreeF))], 'r', label=fName)
+	        ax1.plot(xG, MemFreeG[0:min(int(2*max_time),len(MemFreeG))], 'b', label=gName)
     else:
         x = np.arange(0,minLen/2.0,0.5)
         ax1.plot(x, MemFreeF[0:minLen], 'r', label=fName)
@@ -63,11 +72,14 @@ def draw_unreclaim(f,fName,g,gName,pruneMode):
     #ax1.plot(x, MemFreeG, 'b', label=gName)
     ax1.set_xlabel('time (s)')
     # Make the y-axis label and tick labels match the line color.
-    ax1.set_ylabel('MemFree (MB)', color='r')
-    for tl in ax1.get_yticklabels():
-        tl.set_color('r')
-    plt.legend(loc='upper center')
+    #ax1.set_ylabel('MemFree (MB)', color='r')
+    #for tl in ax1.get_yticklabels():
+    #    tl.set_color('r')
+
+    #plt.legend(loc='upper center')
+    plt.legend()
     ax1.grid(True)
+    fig.tight_layout()
     plt.show()
 """
     ax2 = ax1.twinx() # draw two scales in one plot
@@ -84,5 +96,6 @@ def draw_unreclaim(f,fName,g,gName,pruneMode):
 
 
 if __name__ == '__main__':
-    draw_unreclaim("add-grpc.dat","gRPC","add-rest.dat","REST","Prune")
-    draw_unreclaim("add-netconf.dat","netconf","add-ssh.dat","SSH","Not Prune")
+    #draw_unreclaim("results/add-grpc.dat","gRPC","results/add-rest.dat","REST","Prune")
+    #draw_unreclaim("results/add-netconf.dat","NETCONF","results/add-ssh.dat","SSH","Not Prune")
+    draw_unreclaim("results/pyroute-20-mem.dat","Pyroute2","results/shell-20-mem.dat","Shell","Not Prune",5)

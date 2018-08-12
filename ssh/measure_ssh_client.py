@@ -95,7 +95,7 @@ if __name__ == '__main__':
         f1.write(str(executionTime) + '\n')
         f1.write(str(SystemCPUUsage) + '\n')
 
-    for i in range(1,_N_Experiment+1):
+    """for i in range(1,_N_Experiment+1):
         _Prefix = str(2000+i) + '::'
         psutil.cpu_percent(interval=None, percpu=False)
         start_time = time.time()
@@ -111,7 +111,14 @@ if __name__ == '__main__':
 
         f1.write('non persistent sequential, SSH, del:\n')
         f1.write(str(executionTime) + '\n')
-        f1.write(str(SystemCPUUsage) + '\n')
+        f1.write(str(SystemCPUUsage) + '\n')"""
+
+    for i in range(1,_N_Experiment+1):
+        _Prefix = str(2000+i) + '::'
+        """psutil.cpu_percent(interval=None, percpu=False)
+        start_time = time.time()"""
+
+        SSHCommand_delete("non persistent bulk")
 
     for i in range(1,_N_Experiment+1):
         _Prefix = str(2000+i) + '::'
@@ -133,12 +140,12 @@ if __name__ == '__main__':
 
     for i in range(1,_N_Experiment+1):
         _Prefix = str(2000+i) + '::'
-        psutil.cpu_percent(interval=None, percpu=False)
-        start_time = time.time()
+        """psutil.cpu_percent(interval=None, percpu=False)
+        start_time = time.time()"""
 
         SSHCommand_delete("non persistent bulk")
 
-        executionTime=time.time() - start_time
+        """executionTime=time.time() - start_time
         SystemCPUUsage = psutil.cpu_percent(interval=None, percpu=False)*executionTime
 
         print("non persistent bulk, SSH, del "+str(i))
@@ -147,7 +154,7 @@ if __name__ == '__main__':
 
         f1.write('non persistent bulk, SSH, del:\n')
         f1.write(str(executionTime) + '\n')
-        f1.write(str(SystemCPUUsage) + '\n')
+        f1.write(str(SystemCPUUsage) + '\n')"""
 
     for i in range(1,_N_Experiment+1):
         _Prefix = str(2000+i) + '::'
@@ -167,7 +174,7 @@ if __name__ == '__main__':
         f1.write(str(executionTime) + '\n')
         f1.write(str(SystemCPUUsage) + '\n')
 
-    for i in range(1,_N_Experiment+1):
+    """for i in range(1,_N_Experiment+1):
         _Prefix = str(2000+i) + '::'
         psutil.cpu_percent(interval=None, percpu=False)
         start_time = time.time()
@@ -183,4 +190,11 @@ if __name__ == '__main__':
 
         f1.write('persistent Conncection, SSH, del:\n')
         f1.write(str(executionTime) + '\n')
-        f1.write(str(SystemCPUUsage) + '\n')
+        f1.write(str(SystemCPUUsage) + '\n')"""
+
+    for i in range(1,_N_Experiment+1):
+        _Prefix = str(2000+i) + '::'
+        """psutil.cpu_percent(interval=None, percpu=False)
+        start_time = time.time()"""
+
+        SSHCommand_delete("non persistent bulk")
