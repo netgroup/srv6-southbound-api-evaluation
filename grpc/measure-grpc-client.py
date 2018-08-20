@@ -7,18 +7,18 @@ import srv6_explicit_path_pb2_grpc
 import srv6_explicit_path_pb2
 
 # Define wheter to use SSL or not
-SECURE = False
+SECURE = True
 # SSL cerificate for server validation
-CERTIFICATE = 'cert_client.pem'
+CERTIFICATE = 'server.crt'
 
 # Global variables
 _Username = 'srv6'
 _Password = 'srv6'
-_ServerIP = "192.168.1.2"#"127.0.0.1"
-_Device = "enp5s0"#'enp0s25'
+_ServerIP = "dell-Inspiron-N5110"#"192.168.1.2"#"127.0.0.1"#"192.168.1.2"
+_Device = "enp5s0"#'enp5s0'#"enp0s25"#
 _Prefix = ''
 _Segments = '2000::1e'
-_NumberOfRuleToBeEnforced = 100ss
+_NumberOfRuleToBeEnforced = 100
 _N_Experiment = 20
 _Port = 1234
 
@@ -173,13 +173,19 @@ if __name__ == '__main__':
         executionTime=time.time() - start_time
         SystemCPUUsage = psutil.cpu_percent(interval=None, percpu=False)*executionTime
 
-        print("non persistent sequential, gRPC, Add "+str(i))
+        print("non persistent sequential, gRPC , Add "+str(i))
         print("Execution time: " + str(executionTime))
         print("System-wide CPU Usage: " + str(SystemCPUUsage))
 
-        f1.write('non persistent sequential, gRPC, add:\n')
+        f1.write('non persistent sequential, gRPC , add:\n')
         f1.write(str(executionTime) + '\n')
         f1.write(str(SystemCPUUsage) + '\n')
+
+
+    """for i in range(1,_N_Experiment+1):
+    	_Prefix = str(2000+i) + '::'
+    	delete("non persistent bulk")"""
+
 
     for i in range(1,_N_Experiment+1):
         _Prefix = str(2000+i) + '::'
@@ -191,11 +197,11 @@ if __name__ == '__main__':
         executionTime=time.time() - start_time
         SystemCPUUsage = psutil.cpu_percent(interval=None, percpu=False)*executionTime
 
-        print("non persistent sequential, gRPC, del "+str(i))
+        print("non persistent sequential, gRPC , del "+str(i))
         print("Execution time: " + str(executionTime))
         print("System-wide CPU Usage: " + str(SystemCPUUsage))
 
-        f1.write('non persistent sequential, gRPC, del:\n')
+        f1.write('non persistent sequential, gRPC , del:\n')
         f1.write(str(executionTime) + '\n')
         f1.write(str(SystemCPUUsage) + '\n')
 
@@ -209,11 +215,11 @@ if __name__ == '__main__':
         executionTime=time.time() - start_time
         SystemCPUUsage = psutil.cpu_percent(interval=None, percpu=False)*executionTime
 
-        print("non persistent bulk, gRPC, Add "+str(i))
+        print("non persistent bulk, gRPC , Add "+str(i))
         print("Execution time: " + str(executionTime))
         print("System-wide CPU Usage: " + str(SystemCPUUsage))
 
-        f1.write('non persistent bulk, gRPC, add:\n')
+        f1.write('non persistent bulk, gRPC , add:\n')
         f1.write(str(executionTime) + '\n')
         f1.write(str(SystemCPUUsage) + '\n')
 
@@ -227,11 +233,11 @@ if __name__ == '__main__':
         executionTime=time.time() - start_time
         SystemCPUUsage = psutil.cpu_percent(interval=None, percpu=False)*executionTime
 
-        print("non persistent bulk, gRPC, del "+str(i))
+        print("non persistent bulk, gRPC , del "+str(i))
         print("Execution time: " + str(executionTime))
         print("System-wide CPU Usage: " + str(SystemCPUUsage))
 
-        f1.write('non persistent bulk, gRPC, del:\n')
+        f1.write('non persistent bulk, gRPC , del:\n')
         f1.write(str(executionTime) + '\n')
         f1.write(str(SystemCPUUsage) + '\n')
 
@@ -245,11 +251,11 @@ if __name__ == '__main__':
         executionTime=time.time() - start_time
         SystemCPUUsage = psutil.cpu_percent(interval=None, percpu=False)*executionTime
 
-        print("persistent Conncection, gRPC, Add "+str(i))
+        print("persistent Conncection, gRPC , Add "+str(i))
         print("Execution time: " + str(executionTime))
         print("System-wide CPU Usage: " + str(SystemCPUUsage))
 
-        f1.write('persistent Conncection, gRPC, add:\n')
+        f1.write('persistent Conncection, gRPC , add:\n')
         f1.write(str(executionTime) + '\n')
         f1.write(str(SystemCPUUsage) + '\n')
 
@@ -263,10 +269,15 @@ if __name__ == '__main__':
         executionTime=time.time() - start_time
         SystemCPUUsage = psutil.cpu_percent(interval=None, percpu=False)*executionTime
 
-        print("persistent Conncection, gRPC, del "+str(i))
+        print("persistent Conncection, gRPC , del "+str(i))
         print("Execution time: " + str(executionTime))
         print("System-wide CPU Usage: " + str(SystemCPUUsage))
 
-        f1.write('persistent Conncection, gRPC, del:\n')
+        f1.write('persistent Conncection, gRPC , del:\n')
         f1.write(str(executionTime) + '\n')
         f1.write(str(SystemCPUUsage) + '\n')
+
+
+    """for i in range(1,_N_Experiment+1):
+    	_Prefix = str(2000+i) + '::'
+    	delete("non persistent bulk")"""

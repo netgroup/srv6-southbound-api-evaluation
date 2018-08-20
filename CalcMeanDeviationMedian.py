@@ -2,30 +2,65 @@ import os
 import math
 digitToRound = 5
 
-"""SSH_FullProcess_InputFileName = 'PureResults/SSHResults20_FullProcess.txt'
-SSH_FullProcess_OutputFileName = 'Mean_Median_Deviation_SSH_FullProcess.txt'
+SSH_FullProcess_InputFileName = 'ssh/SSHResults20_FullProcess.txt'
+SSH_FullProcess_OutputFileName = 'mean-median/SSH_FullProcess_Mean_Median_Deviation.txt'
 
-SSH_JustCommunicationPart_InputFileName = 'PureResults/SSHResults20_JustCommunicationPart.txt'
-SSH_JustCommunicationPart_OutputFileName = 'Mean_Median_Deviation_SSH_JustCommunicationPart.txt'
+#2 percent packet loss and 150ms delay
+SSH_PL_DL_InputFileName = 'ssh/SSHResults20_PL_DL.txt'
+SSH_PL_DL_OutputFileName = 'mean-median/SSH_PL_DL_Mean_Median_Deviation.txt'
+
+SSH_JustCommunicationPart_InputFileName = 'ssh/SSHResults20_JustCommunication.txt'
+SSH_JustCommunicationPart_OutputFileName = 'mean-median/SSH_JustCommunicationPart_Mean_Median_Deviation.txt'
+
+SSH_JustCommunicationPart_PL_DL_InputFileName = 'ssh/SSHResults20_JustCommunication_PL_DL.txt'
+SSH_JustCommunicationPart_PL_DL_OutputFileName = 'mean-median/SSH_JustCommunicationPart_PL_DL_Mean_Median_Deviation.txt'
+
+netconf_FullProcess_InputFileName = 'netconf/netconfResults20_FullProcess.txt'
+netconf_FullProcess_OutputFileName = 'mean-median/netconf_FullProcess_Mean_Median_Deviation.txt'
+
+#2 percent packet loss and 150ms delay
+netconf_PL_DL_InputFileName = 'netconf/netconfResults20_PL_DL.txt'
+netconf_PL_DL_OutputFileName = 'mean-median/netconf_PL_DL_Mean_Median_Deviation.txt'
+
+netconf_JustCommunicationPart_InputFileName = 'netconf/netconfResults20_JustCommunication.txt'
+netconf_JustCommunicationPart_OutputFileName = 'mean-median/netconf_JustCommunicationPart_Mean_Median_Deviation.txt'
+
+netconf_JustCommunicationPart_PL_DL_InputFileName = 'netconf/netconfResults20_JustCommunication_PL_DL.txt'
+netconf_JustCommunicationPart_PL_DL_OutputFileName = 'mean-median/netconf_JustCommunicationPart_PL_DL_Mean_Median_Deviation.txt'
 
 #REST_FullProcess_InputFileName = 'PureResults/RESTResults20.txt'
-REST_FullProcess_InputFileName = 'PureResults/RESTResults20_FullProcess.txt'
-REST_FullProcess_OutputFileName = 'Mean_Median_Deviation_REST_FullProcess.txt'
+REST_FullProcess_InputFileName = 'rest/RESTResults20_FullProcess.txt'
+REST_FullProcess_OutputFileName = 'mean-median/REST_FullProcess_Mean_Median_Deviation.txt'
 
 #REST_JustCommunicationPart_InputFileName = 'PureResults/RESTResults20.txt'
-REST_JustCommunicationPart_InputFileName = 'PureResults/RESTResults20_JustCommunicationPart.txt'
-REST_JustCommunicationPart_OutputFileName = 'Mean_Median_Deviation_REST_JustCommunicationPart.txt'
+REST_JustCommunicationPart_InputFileName = 'rest/RESTResults20_JustCommunication.txt'
+REST_JustCommunicationPart_OutputFileName = 'mean-median/REST_JustCommunicationPart_Mean_Median_Deviation.txt'
+
+#REST_JustCommunicationPart_InputFileName = 'PureResults/RESTResults20.txt'
+REST_JustCommunicationPart_PL_DL_InputFileName = 'rest/RESTResults20_JustCommunication_PL_DL.txt'
+REST_JustCommunicationPart_PL_DL_OutputFileName = 'mean-median/REST_JustCommunicationPart_PL_DL_Mean_Median_Deviation.txt'
+
+#2 percent packet loss and 150ms delay
+REST_PL_DL_InputFileName = 'rest/RESTResults20_PL_DL.txt'
+REST_PL_DL_OutputFileName = 'mean-median/REST_PL_DL_Mean_Median_Deviation.txt'
 
 #gRPC_FullProcess_InputFileName = 'PureResults/gRPCResults20.txt'
-gRPC_FullProcess_InputFileName = 'PureResults/gRPCResults20_FullProcess.txt'
-gRPC_FullProcess_OutputFileName = 'Mean_Median_Deviation_gRPC_FullProcess.txt'
+gRPC_FullProcess_InputFileName = 'grpc/gRPCResults20_FullProcess.txt'
+gRPC_FullProcess_OutputFileName = 'mean-median/gRPC_FullProcess_Mean_Median_Deviation.txt'
+
+#2 percent packet loss and 150ms delay
+gRPC_PL_DL_InputFileName = 'grpc/gRPCResutls_PL_DL.txt'
+gRPC_PL_DL_OutputFileName = 'mean-median/gRPC_PL_DL_Mean_Median_Deviation.txt'
 
 #gRPC_JustCommunicationPart_InputFileName = 'PureResults/gRPCResults20.txt'
-gRPC_JustCommunicationPart_InputFileName = 'PureResults/gRPCResults20_JustCommunicationPart.txt'
-gRPC_JustCommunicationPart_OutputFileName = 'Mean_Median_Deviation_gRPC_JustCommunicationPart.txt'
-"""
+gRPC_JustCommunicationPart_InputFileName = 'grpc/gRPCResults20_JustCommunication.txt'
+gRPC_JustCommunicationPart_OutputFileName = 'mean-median/gRPC_JustCommunicationPart_Mean_Median_Deviation.txt'
+
+gRPC_JustCommunicationPart_PL_DL_InputFileName = 'grpc/gRPCResults20_JustCommunication_PL_DL.txt'
+gRPC_JustCommunicationPart_PL_DL_OutputFileName = 'mean-median/gRPC_JustCommunicationPart_PL_DL_Mean_Median_Deviation.txt'
+
 LREInputFileName = 'LocalRuleEnforcement/Persistant_LocalRuleEnforcement20.txt'
-LREOutputFileName = 'LocalRuleEnforcement/LocalRuleEnforcement_Mean_Median_Deviation.txt'
+LREOutputFileName = 'mean-median//LocalRuleEnforcement_Mean_Median_Deviation.txt'
 
 """
 FullProcess_gRPC_REST_SSH_OutputName_File = 'FullProcess.txt'
@@ -91,49 +126,124 @@ f2 = open(LREOutputFileName,'w')
 for i in range(0, len(resultsKeys)):
 	PrintResults(f2,i,resultsKeys,DeviationTime,DeviationSysCPU,MeanTime,MeanSysCPU)
 f2.close()
-"""
+
+#########SSH#################
 #print result of SSH - Full
-(resultsKeys,DeviationTime,DeviationAppCPU,DeviationSysCPU,DeviationMem,MeanTime,MeanAppCPU,MeanSysCPU,MeanMem) = CalculateMetrics(SSH_FullProcess_InputFileName)
+(resultsKeys,DeviationTime,DeviationSysCPU,MeanTime,MeanSysCPU)  = CalculateMetrics(SSH_FullProcess_InputFileName)
 f2 = open(SSH_FullProcess_OutputFileName,'w')
 for i in range(0, len(resultsKeys)):
-	PrintResults(f2,i,resultsKeys,DeviationTime,DeviationAppCPU,DeviationSysCPU,DeviationMem,MeanTime,MeanAppCPU,MeanSysCPU,MeanMem)
+	PrintResults(f2,i,resultsKeys,DeviationTime,DeviationSysCPU,MeanTime,MeanSysCPU)
 f2.close()
 
 #print result of SSH - Just Communication
-(resultsKeys,DeviationTime,DeviationAppCPU,DeviationSysCPU,DeviationMem,MeanTime,MeanAppCPU,MeanSysCPU,MeanMem) = CalculateMetrics(SSH_JustCommunicationPart_InputFileName)
+(resultsKeys,DeviationTime,DeviationSysCPU,MeanTime,MeanSysCPU) = CalculateMetrics(SSH_JustCommunicationPart_InputFileName)
 f2 = open(SSH_JustCommunicationPart_OutputFileName,'w')
 for i in range(0, len(resultsKeys)):
-	PrintResults(f2,i,resultsKeys,DeviationTime,DeviationAppCPU,DeviationSysCPU,DeviationMem,MeanTime,MeanAppCPU,MeanSysCPU,MeanMem)
+	PrintResults(f2,i,resultsKeys,DeviationTime,DeviationSysCPU,MeanTime,MeanSysCPU)
 f2.close()
 
+#print result of SSH - Full PL DL
+(resultsKeys,DeviationTime,DeviationSysCPU,MeanTime,MeanSysCPU)  = CalculateMetrics(SSH_PL_DL_InputFileName)
+f2 = open(SSH_PL_DL_OutputFileName,'w')
+for i in range(0, len(resultsKeys)):
+	PrintResults(f2,i,resultsKeys,DeviationTime,DeviationSysCPU,MeanTime,MeanSysCPU)
+f2.close()
+
+#print result of SSH - Just Communication  PL DL
+(resultsKeys,DeviationTime,DeviationSysCPU,MeanTime,MeanSysCPU) = CalculateMetrics(SSH_JustCommunicationPart_PL_DL_InputFileName)
+f2 = open(SSH_JustCommunicationPart_PL_DL_OutputFileName,'w')
+for i in range(0, len(resultsKeys)):
+	PrintResults(f2,i,resultsKeys,DeviationTime,DeviationSysCPU,MeanTime,MeanSysCPU)
+f2.close()
+
+#########gRPC#################
 #print result of gRPC - Full 
-(resultsKeys,DeviationTime,DeviationAppCPU,DeviationSysCPU,DeviationMem,MeanTime,MeanAppCPU,MeanSysCPU,MeanMem) = CalculateMetrics(gRPC_FullProcess_InputFileName)
+(resultsKeys,DeviationTime,DeviationSysCPU,MeanTime,MeanSysCPU) = CalculateMetrics(gRPC_FullProcess_InputFileName)
 f2 = open(gRPC_FullProcess_OutputFileName,'w')
 for i in range(0, len(resultsKeys)):
-	PrintResults(f2,i,resultsKeys,DeviationTime,DeviationAppCPU,DeviationSysCPU,DeviationMem,MeanTime,MeanAppCPU,MeanSysCPU,MeanMem)
+	PrintResults(f2,i,resultsKeys,DeviationTime,DeviationSysCPU,MeanTime,MeanSysCPU)
 f2.close()
 
 #print result of gRPC - Just Communication
-(resultsKeys,DeviationTime,DeviationAppCPU,DeviationSysCPU,DeviationMem,MeanTime,MeanAppCPU,MeanSysCPU,MeanMem) = CalculateMetrics(gRPC_JustCommunicationPart_InputFileName)
+(resultsKeys,DeviationTime,DeviationSysCPU,MeanTime,MeanSysCPU) = CalculateMetrics(gRPC_JustCommunicationPart_InputFileName)
 f2 = open(gRPC_JustCommunicationPart_OutputFileName,'w')
 for i in range(0, len(resultsKeys)):
-	PrintResults(f2,i,resultsKeys,DeviationTime,DeviationAppCPU,DeviationSysCPU,DeviationMem,MeanTime,MeanAppCPU,MeanSysCPU,MeanMem)
+	PrintResults(f2,i,resultsKeys,DeviationTime,DeviationSysCPU,MeanTime,MeanSysCPU)
 f2.close()
 
+#print result of gRPC - Full _PL_DL
+(resultsKeys,DeviationTime,DeviationSysCPU,MeanTime,MeanSysCPU) = CalculateMetrics(gRPC_PL_DL_InputFileName)
+f2 = open(gRPC_PL_DL_OutputFileName,'w')
+for i in range(0, len(resultsKeys)):
+	PrintResults(f2,i,resultsKeys,DeviationTime,DeviationSysCPU,MeanTime,MeanSysCPU)
+f2.close()
+
+#print result of gRPC - Just Communication_PL_DL
+(resultsKeys,DeviationTime,DeviationSysCPU,MeanTime,MeanSysCPU) = CalculateMetrics(gRPC_JustCommunicationPart_PL_DL_InputFileName)
+f2 = open(gRPC_JustCommunicationPart_PL_DL_OutputFileName,'w')
+for i in range(0, len(resultsKeys)):
+	PrintResults(f2,i,resultsKeys,DeviationTime,DeviationSysCPU,MeanTime,MeanSysCPU)
+f2.close()
+
+#########netconf#################
+#print result of netConf - Full 
+(resultsKeys,DeviationTime,DeviationSysCPU,MeanTime,MeanSysCPU) = CalculateMetrics(netconf_FullProcess_InputFileName)
+f2 = open(netconf_FullProcess_OutputFileName,'w')
+for i in range(0, len(resultsKeys)):
+	PrintResults(f2,i,resultsKeys,DeviationTime,DeviationSysCPU,MeanTime,MeanSysCPU)
+f2.close()
+
+#print result of netconf - Just Communication
+(resultsKeys,DeviationTime,DeviationSysCPU,MeanTime,MeanSysCPU) = CalculateMetrics(netconf_JustCommunicationPart_InputFileName)
+f2 = open(netconf_JustCommunicationPart_OutputFileName,'w')
+for i in range(0, len(resultsKeys)):
+	PrintResults(f2,i,resultsKeys,DeviationTime,DeviationSysCPU,MeanTime,MeanSysCPU)
+f2.close()
+
+#print result of netconf - Full _PL_DL
+(resultsKeys,DeviationTime,DeviationSysCPU,MeanTime,MeanSysCPU) = CalculateMetrics(netconf_PL_DL_InputFileName)
+f2 = open(netconf_PL_DL_OutputFileName,'w')
+for i in range(0, len(resultsKeys)):
+	PrintResults(f2,i,resultsKeys,DeviationTime,DeviationSysCPU,MeanTime,MeanSysCPU)
+f2.close()
+
+#print result of netconf - Just Communication_PL_DL
+(resultsKeys,DeviationTime,DeviationSysCPU,MeanTime,MeanSysCPU) = CalculateMetrics(netconf_JustCommunicationPart_PL_DL_InputFileName)
+f2 = open(netconf_JustCommunicationPart_PL_DL_OutputFileName,'w')
+for i in range(0, len(resultsKeys)):
+	PrintResults(f2,i,resultsKeys,DeviationTime,DeviationSysCPU,MeanTime,MeanSysCPU)
+f2.close()
+
+#########REST#################
 #print result of REST - Full 
-(resultsKeys,DeviationTime,DeviationAppCPU,DeviationSysCPU,DeviationMem,MeanTime,MeanAppCPU,MeanSysCPU,MeanMem) = CalculateMetrics(REST_FullProcess_InputFileName)
+(resultsKeys,DeviationTime,DeviationSysCPU,MeanTime,MeanSysCPU) = CalculateMetrics(REST_FullProcess_InputFileName)
 f2 = open(REST_FullProcess_OutputFileName,'w')
 for i in range(0, len(resultsKeys)):
-	PrintResults(f2,i,resultsKeys,DeviationTime,DeviationAppCPU,DeviationSysCPU,DeviationMem,MeanTime,MeanAppCPU,MeanSysCPU,MeanMem)
+	PrintResults(f2,i,resultsKeys,DeviationTime,DeviationSysCPU,MeanTime,MeanSysCPU)
 f2.close()
 
 #print result of REST - Just Communication
-(resultsKeys,DeviationTime,DeviationAppCPU,DeviationSysCPU,DeviationMem,MeanTime,MeanAppCPU,MeanSysCPU,MeanMem) = CalculateMetrics(REST_JustCommunicationPart_InputFileName)
+(resultsKeys,DeviationTime,DeviationSysCPU,MeanTime,MeanSysCPU) = CalculateMetrics(REST_JustCommunicationPart_InputFileName)
 f2 = open(REST_JustCommunicationPart_OutputFileName,'w')
 for i in range(0, len(resultsKeys)):
-	PrintResults(f2,i,resultsKeys,DeviationTime,DeviationAppCPU,DeviationSysCPU,DeviationMem,MeanTime,MeanAppCPU,MeanSysCPU,MeanMem)
+	PrintResults(f2,i,resultsKeys,DeviationTime,DeviationSysCPU,MeanTime,MeanSysCPU)
 f2.close()
 
+#print result of REST - Full _PL_DL
+(resultsKeys,DeviationTime,DeviationSysCPU,MeanTime,MeanSysCPU) = CalculateMetrics(REST_PL_DL_InputFileName)
+f2 = open(REST_PL_DL_OutputFileName,'w')
+for i in range(0, len(resultsKeys)):
+	PrintResults(f2,i,resultsKeys,DeviationTime,DeviationSysCPU,MeanTime,MeanSysCPU)
+f2.close()
+
+#print result of REST - Just Communication_PL_DL
+(resultsKeys,DeviationTime,DeviationSysCPU,MeanTime,MeanSysCPU) = CalculateMetrics(REST_JustCommunicationPart_PL_DL_InputFileName)
+f2 = open(REST_JustCommunicationPart_PL_DL_OutputFileName,'w')
+for i in range(0, len(resultsKeys)):
+	PrintResults(f2,i,resultsKeys,DeviationTime,DeviationSysCPU,MeanTime,MeanSysCPU)
+f2.close()
+
+"""
 #print comprative results Full
 (resultsKeysREST_F,DeviationTimeREST_F,DeviationAppCPUREST_F,DeviationSysCPUREST_F,DeviationMemREST_F,MeanTimeREST_F,MeanAppCPUREST_F,MeanSysCPUREST_F,MeanMemREST_F) = CalculateMetrics(REST_FullProcess_InputFileName)
 (resultsKeysgRPC_F,DeviationTimegRPC_F,DeviationAppCPUgRPC_F,DeviationSysCPUgRPC_F,DeviationMemgRPC_F,MeanTimeRPC,MeanAppCPURPC,MeanSysCPURPC,MeanMemRPC) = CalculateMetrics(gRPC_FullProcess_InputFileName)
