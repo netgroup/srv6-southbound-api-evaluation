@@ -96,6 +96,6 @@ def draw_unreclaim(f,fName,g,gName,pruneMode,max_time=0):
 
 
 if __name__ == '__main__':
-    #draw_unreclaim("results/add-grpc.dat","gRPC","results/add-rest.dat","REST","Prune")
-    #draw_unreclaim("results/add-netconf.dat","NETCONF","results/add-ssh.dat","SSH","Not Prune")
+    draw_unreclaim("results/add-grpc.dat","gRPC","results/add-rest.dat","REST","Prune")
+    draw_unreclaim("results/add-netconf.dat","NETCONF","results/add-ssh.dat","SSH","Not Prune")
     draw_unreclaim("results/pyroute-20-mem.dat","Pyroute2","results/shell-20-mem.dat","Shell","Not Prune",5)
