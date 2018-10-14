@@ -1,6 +1,6 @@
 # SRv6 Southbound API Evaluation
 
-This project provides a collection of modules for the evaluation of the SRv6 SRv6 Southbound API
+This project provides a collection of modules for the evaluation of the SRv6 Southbound API
 
 ### Preliminaries ###
 
