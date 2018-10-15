@@ -32,83 +32,96 @@ Then Change the IP address of the selected interface in the Server
 
 ### How to perform the gRPC experiment ###
 
-In the Client machine, move in to the gRPC folder
+In the server machine, move in to the /srv6-controller/grpc folder.
+Open the grpc_server.py file. Change the value of "\_Device" variable to the proper <interface> of the device.
+Run the servers in two different terminals:
 
-    cd gRPC/
+    sudo python grpc_server.py -s
+    sudo python grpc_server.py
+    
+In the client machine, move in to the /srv6-controller/grpc folder. 
+Open measure_grpc_client.py and adjust "ServerIP, \_Device, \_NumberOfRuleToBeEnforced, \_N_Experiment"  parameters. 
+Select the connection type by setting "SECURE" parameter in the file. if you choose "True" then the client will make secured connections otherwise insecure connections. 
+Then run the file:
 
-Open the A_gRPC_20Times.py file
+    sudo python measure_grpc_client.py
 
-    nano A_gRPC_20Times.py
-
-Change the value of "_Device" variable to the selected <interface> in step 7. Now press ctrl+o and then ctrl+x
-In the server machine, to gRPC folder and run the gRPC servers.
-
-    sudo python Server_gRPC_Shell.py secure
-    sudo python Server_gRPC_Shell.py insecure
-    sudo python NullServer_gRPC.py secure
-    sudo python NullServer_gRPC.py insecure
-
-In the client machine, run A_gRPC_20Times.py  
-
-    sudo python A_gRPC_20Times.py
-
-After the execution is finished the results of the Full process and Just communication parts (with and without packet loss and delay) will be in the gRPC/PureResults folder
+After the execution is finished the results will be in grpc/gRPC20.txt file
 
 ### How to perform the REST experiment ###
 
-In the Client machine, move in to the REST folder
+In the server machine, move in to the /srv6-controller/rest folder. 
+Open the rest_server.py file. Change the value of "\_Device" variable to the proper <interface> of the device.
+Run the servers in two different terminals:
 
-    cd REST/
+    sudo python rest_server.py -s
+    sudo python rest_server.py
+   
+In the client machine, move in to the /srv6-controller/rest folder. 
+Open measure_rest_client.py and adjust "ServerIP, \_Device, \_NumberOfRuleToBeEnforced, \_N_Experiment"  parameters. 
+Select the connection type by setting "SECURE" parameter in the file. if you choose "True" then the client will make secured connections otherwise insecure connections. 
+Then run the file:
 
-Open the A_REST_20Times.py file
+    sudo python measure_rest_client.py
 
-    nano A_REST_20Times.py
-
-Change the value of "_Device" variable to the selected <interface> in step 7. Now press ctrl+o and then ctrl+x
-In the server machine, to REST folder and run the REST servers.
-
-    sudo python Server_REST_Shell.py secure
-    sudo python Server_REST_Shell.py insecure
-    sudo python NullServer_REST.py secure
-    sudo python NullServer_REST.py insecure
-
-In the client machine, run A_REST_20Times.py
-
-    sudo python A_REST_20Times.py
-
-After the execution is finished the results of the Full process and Just communication parts (with and without packet loss and delay) will be in the REST/PureResults folder
+After the execution is finished the results will be in rest/REST20.txt file
 
 ### How to perform the SSH experiment ###
 
-In the Client machine, move in to the SSH folder
+In the server machine, move in to the /srv6-controller/ssh folder. 
+Open the ssh_server.py file. Change the value of "\_Device" variable to the proper <interface> of the device.
+Run the servers in two different terminals:
 
-    cd SSH/
+    sudo python ssh_server.py
+   
+In the client machine, move in to the /srv6-controller/ssh folder. 
+Open measure_ssh_client.py and adjust "ServerIP, \_Device, \_NumberOfRuleToBeEnforced, \_N_Experiment"  parameters. 
+Then run the file:
 
-Open the A_SSH_20Times.py file
-    
+    sudo python measure_ssh_client.py
 
-    nano A_SSH_20Times.py
+After the execution is finished the results will be in ssh/SSH20.txt file
 
-Change the value of "_Device" variable to the selected <interface> in step 7. Now press ctrl+o and then ctrl+x
-In the client machine, run A_REST_20Times.py
+### How to perform the NETCONF experiment ###
 
-    sudo python A_SSH_20Times.py
+In the server machine, move in to the /srv6-controller/netconf folder. 
+Open the netconf_server.py file. Change the value of "\_Device" variable to the proper <interface> of the device.
+Run the servers in two different terminals:
 
-After the execution is finished the results of the Full process and Just communication parts (with and without packet loss and delay) will be in the SSH/PureResults folder
+    sudo python netconf_server.py
+   
+In the client machine, move in to the /srv6-controller/netconf folder. 
+Open measure_netconf_client.py and adjust "ServerIP, \_Device, \_NumberOfRuleToBeEnforced, \_N_Experiment"  parameters. 
+Then run the file:
+
+    sudo python measure_netconf_client.py
+
+After the execution is finished the results will be in netconf/netconf20.txt file
+
 
 ### How to perform the pyroute2 and shell experiments ###
 
-In the server, move in to the LocalRuleEnforcement folder
+In the server, move in to the /srv6-controller/LocalRuleEnforcement folder.
+Open the Pyroute2_LRE.py  Shell_LRE.py files. Change the value of "\_Device" variable to the proper <interface> of the device.
+Run the codes:
 
-    cd LocalRuleEnforcement/
+    sudo python Pyroute2_LRE.py
+    sudo python Shell_LRE.py
 
-Open A_LocalRuleEnforcement_20Times.py
+After the execution is finished the results will be in LocalRuleEnforcement/LocalRuleEnforcement20.txt file
 
-    nano A_LocalRuleEnforcement_20Times.py
+### How to Measure the CPU usage ###
+Go to /srv6-controller/cpu-measurements folder. 
+Run the plot-cpu.py code:
 
-Change the value of "_Device" variable to the selected <interface> in step 7. Now press ctrl+o and then ctrl+x
-In the server, run A_LocalRuleEnforcement_20Times.py
+    sudo python plot-cpu.py
 
-    sudo python A_LocalRuleEnforcement_20Times.py
+By pressing the ctrl+c the measurement will be stopped. Press these keys exactly one time (not more than that)
 
-After the execution is finished the results of the Full process and Just communication parts (with and without packet loss and delay) will be in the LocalRuleEnforcement folder
+### How to Measure the Memory usage ###
+Go to memory-measurement folder. 
+Run the monitor.sh code:
+
+    sudo bash ./monitor.sh
+
+By pressing the ctrl+c the measurement will be stopped. Press these keys exactly one time (not more than that)

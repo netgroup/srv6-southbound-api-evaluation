@@ -229,111 +229,91 @@ def delete(communicationType):
 
 if __name__ == '__main__':
     f1 = open('NetConf20.txt','a+')
-    #Add Operation
+    ##################################################################
+    #Add Operation - non persistent sequential Connection (NP-Con-Seq)
     for i in range(1,_N_Experiment+1):
         _Prefix = str(2000+i) + '::'
         psutil.cpu_percent(interval=None, percpu=False)
         start_time = time.time()
-
         add("non persistent sequential")
-
         executionTime=time.time() - start_time
         SystemCPUUsage = psutil.cpu_percent(interval=None, percpu=False)*executionTime
-
         print("non persistent sequential, netconf, Add "+str(i))
         print("Execution time: " + str(executionTime))
         print("System-wide CPU Usage: " + str(SystemCPUUsage))
-
         f1.write('non persistent sequential, netconf, add:\n')
         f1.write(str(executionTime) + '\n')
         f1.write(str(SystemCPUUsage) + '\n')
-
+    #Delete Operation - non persistent sequential Connection (NP-Con-Seq)
     for i in range(1,_N_Experiment+1):
         _Prefix = str(2000+i) + '::'
         psutil.cpu_percent(interval=None, percpu=False)
         start_time = time.time()
-
         delete("non persistent sequential")
-
         executionTime=time.time() - start_time
         SystemCPUUsage = psutil.cpu_percent(interval=None, percpu=False)*executionTime
-
         print("non persistent sequential, netconf, del "+str(i))
         print("Execution time: " + str(executionTime))
         print("System-wide CPU Usage: " + str(SystemCPUUsage))
-
         f1.write('non persistent sequential, netconf, del:\n')
         f1.write(str(executionTime) + '\n')
         f1.write(str(SystemCPUUsage) + '\n')
-
+    ##################################################################
+    #Add Operation - non persistent bulk (NP-Bulk)
     for i in range(1,_N_Experiment+1):
         _Prefix = str(2000+i) + '::'
         psutil.cpu_percent(interval=None, percpu=False)
         start_time = time.time()
-
         add("non persistent bulk")
-
         executionTime=time.time() - start_time
         SystemCPUUsage = psutil.cpu_percent(interval=None, percpu=False)*executionTime
-
         print("non persistent bulk, netconf, Add "+str(i))
         print("Execution time: " + str(executionTime))
         print("System-wide CPU Usage: " + str(SystemCPUUsage))
-
         f1.write('non persistent bulk, netconf, add:\n')
         f1.write(str(executionTime) + '\n')
         f1.write(str(SystemCPUUsage) + '\n')
-
+    #Delete Operation - non persistent bulk (NP-Bulk)
     for i in range(1,_N_Experiment+1):
         _Prefix = str(2000+i) + '::'
         psutil.cpu_percent(interval=None, percpu=False)
         start_time = time.time()
-
         delete("non persistent bulk")
-
         executionTime=time.time() - start_time
         SystemCPUUsage = psutil.cpu_percent(interval=None, percpu=False)*executionTime
-
         print("non persistent bulk, netconf, del "+str(i))
         print("Execution time: " + str(executionTime))
         print("System-wide CPU Usage: " + str(SystemCPUUsage))
-
         f1.write('non persistent bulk, netconf, del:\n')
         f1.write(str(executionTime) + '\n')
         f1.write(str(SystemCPUUsage) + '\n')
-
+    ##################################################################
+    #Add Operation - persistent Conncection (P-Con_Seq)
     for i in range(1,_N_Experiment+1):
         _Prefix = str(2000+i) + '::'
         psutil.cpu_percent(interval=None, percpu=False)
         start_time = time.time()
-
         add("persistent Conncection")
-
         executionTime=time.time() - start_time
         SystemCPUUsage = psutil.cpu_percent(interval=None, percpu=False)*executionTime
-
         print("persistent Conncection, netconf, Add "+str(i))
         print("Execution time: " + str(executionTime))
         print("System-wide CPU Usage: " + str(SystemCPUUsage))
-
         f1.write('persistent Conncection, netconf, add:\n')
         f1.write(str(executionTime) + '\n')
         f1.write(str(SystemCPUUsage) + '\n')
-
+    #Delete Operation - persistent Conncection (P-Con_Seq)
     for i in range(1,_N_Experiment+1):
         _Prefix = str(2000+i) + '::'
         psutil.cpu_percent(interval=None, percpu=False)
         start_time = time.time()
-
         delete("persistent Conncection")
-
         executionTime=time.time() - start_time
         SystemCPUUsage = psutil.cpu_percent(interval=None, percpu=False)*executionTime
-
         print("persistent Conncection, netconf, del "+str(i))
         print("Execution time: " + str(executionTime))
         print("System-wide CPU Usage: " + str(SystemCPUUsage))
-
         f1.write('persistent Conncection, netconf, del:\n')
         f1.write(str(executionTime) + '\n')
         f1.write(str(SystemCPUUsage) + '\n')
+    f1.close()
