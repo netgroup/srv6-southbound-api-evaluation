@@ -39,7 +39,7 @@ Run the servers in two different terminals:
     sudo python grpc_server.py -s
     sudo python grpc_server.py
     
-In the client machine, move in to the /srv6-controller/grpc folder. 
+In the client machine, move in to the grpc folder. 
 Open measure_grpc_client.py and adjust "ServerIP, \_Device, \_NumberOfRuleToBeEnforced, \_N_Experiment"  parameters. 
 Select the connection type by setting "SECURE" parameter in the file. if you choose "True" then the client will make secured connections otherwise insecure connections. 
 Then run the file:
@@ -57,7 +57,7 @@ Run the servers in two different terminals:
     sudo python rest_server.py -s
     sudo python rest_server.py
    
-In the client machine, move in to the /srv6-controller/rest folder. 
+In the client machine, move in to the rest folder. 
 Open measure_rest_client.py and adjust "ServerIP, \_Device, \_NumberOfRuleToBeEnforced, \_N_Experiment"  parameters. 
 Select the connection type by setting "SECURE" parameter in the file. if you choose "True" then the client will make secured connections otherwise insecure connections. 
 Then run the file:
@@ -74,7 +74,7 @@ Run the servers in two different terminals:
 
     sudo python ssh_server.py
    
-In the client machine, move in to the /srv6-controller/ssh folder. 
+In the client machine, move in to the ssh folder. 
 Open measure_ssh_client.py and adjust "ServerIP, \_Device, \_NumberOfRuleToBeEnforced, \_N_Experiment"  parameters. 
 Then run the file:
 
@@ -90,7 +90,7 @@ Run the servers in two different terminals:
 
     sudo python netconf_server.py
    
-In the client machine, move in to the /srv6-controller/netconf folder. 
+In the client machine, move in to the netconf folder. 
 Open measure_netconf_client.py and adjust "ServerIP, \_Device, \_NumberOfRuleToBeEnforced, \_N_Experiment"  parameters. 
 Then run the file:
 
@@ -108,10 +108,10 @@ Run the codes:
     sudo python Pyroute2_LRE.py
     sudo python Shell_LRE.py
 
-After the execution is finished the results will be in LocalRuleEnforcement/LocalRuleEnforcement20.txt file
+After the execution is finished the results will be in /srv6-controller/LocalRuleEnforcement/LocalRuleEnforcement20.txt file
 
 ### How to Measure the CPU usage ###
-Go to /srv6-controller/cpu-measurements folder. 
+Go to cpu-measurements folder. 
 Run the plot-cpu.py code:
 
     sudo python plot-cpu.py
