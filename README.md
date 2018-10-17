@@ -16,9 +16,9 @@ Rv6 and Pyroute2 should be installed and active on the Server (routing device)
 
 ### Before starting the experiment ###
 
-This experiment is designed for a two machine secenario in which the SDN controller is considerd as the client and the routing device is considered as the Server.
+This experiment is designed for a two machine secenario in which the SDN controller is considerd as the client and the routing device is considered as the server.
 
-At the beginig this repository should be cloned in to the local machines (both client (controller), and Server)
+At the beginning this repository should be cloned in to the local machines (both client and server)
 
     git clone https://github.com/mohammad59mt/srv6-southbound-api-evaluation.git
 
@@ -40,7 +40,7 @@ In the server machine, move in to the project: srv6-controller, folder: grpc.
 Open the grpc_server.py file. Change the value of "\_Device" variable to the proper <interface> of the device.
 Run the servers in two different terminals:
 
-    sudo python grpc_server.py -s
+    sudo python grpc_server.py -s (secure)
     sudo python grpc_server.py
     
 In the client machine, move in to project: srv6-southbound-api-evaluation, folder: grpc. 
@@ -58,7 +58,7 @@ In the server machine, move in to project: srv6-controller, folder: rest.
 Open the rest_server.py file. Change the value of "\_Device" variable to the proper <interface> of the device.
 Run the servers in two different terminals:
 
-    sudo python rest_server.py -s
+    sudo python rest_server.py -s (secure)
     sudo python rest_server.py
    
 In the client machine, move in to project: srv6-southbound-api-evaluation, folder: rest. 
@@ -101,7 +101,6 @@ Then run the file:
     sudo python measure_netconf_client.py
 
 After the execution is finished the results will be in project: srv6-southbound-api-evaluation, file: netconf/netconf20.txt
-
 
 ### How to perform the pyroute2 and shell experiments ###
 
