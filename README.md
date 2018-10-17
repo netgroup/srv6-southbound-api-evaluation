@@ -6,13 +6,15 @@ This project provides a collection of modules for the evaluation of the SRv6 Sou
 
 The IP address of the server (routing device) should be 2002::1.
 
-For gRPC experiment, ports 50051, 50052, 50053, and 50054 should not be used by other applications (otherwise, A_gRPC_20Times, NullServer_gRPC.py, Server_gRPC_Pyroute, and Server_gRPC_Shell should be rewritten).
+For gRPC experiment, ports 50051, 50052, 50053, and 50054 should not be used by other applications.
 
-For REST experiment, ports 80, 81, 443, and 444 should be free (otherwise, NullServer_REST.py, Server_REST_Pyroute.py, and Server_REST_Shell.py should be rewritted)
+For REST experiment, ports 8080, 80, 81, 443, and 444 should be free.
 
-For SSH experiment, SSH service should be active on the Server (routing device)
+For NETCONF experiments, port 830 should be free
 
-Rv6 and Pyroute2 should be installed and active on the Server (routing device)
+For SSH experiments, port 220 should be free
+
+pyroute2, paramiko, netconf should be installed and active on the local machines
 
 ### Before starting the experiment ###
 
