@@ -6,21 +6,27 @@ This project provides a collection of modules for the evaluation of the SRv6 Sou
 
 The IP address of the server (routing device) should be 2002::1.
 
-For gRPC experiment, ports 50051, 50052, 50053, and 50054 should not be used by other applications (otherwise, A_gRPC_20Times, NullServer_gRPC.py, Server_gRPC_Pyroute, and Server_gRPC_Shell should be rewritten).
+For gRPC experiment, ports 50051, 50052, 50053, and 50054 should not be used by other applications.
 
-For REST experiment, ports 80, 81, 443, and 444 should be free (otherwise, NullServer_REST.py, Server_REST_Pyroute.py, and Server_REST_Shell.py should be rewritted)
+For REST experiment, ports 8080, 80, 81, 443, and 444 should be free.
 
-For SSH experiment, SSH service should be active on the Server (routing device)
+For NETCONF experiments, port 830 should be free
 
-Rv6 and Pyroute2 should be installed and active on the Server (routing device)
+For SSH experiments, port 220 should be free
+
+pyroute2, paramiko, netconf should be installed and active on the local machines
 
 ### Before starting the experiment ###
 
-This experiment is designed for a two machine secenario in which the SDN controller is considerd as the client and the routing device is considered as the Server.
+This experiment is designed for a two machine secenario in which the SDN controller is considerd as the client and the routing device is considered as the server.
 
-At the beginig this repository should be cloned in to the local machines (both client (controller, and Server)
+At the beginning this repository should be cloned in to the local machines (both client and server)
 
     git clone https://github.com/mohammad59mt/srv6-southbound-api-evaluation.git
+
+Additionally, another repository should be cloned in to the server machine.
+
+    git clone https://mtajiki@bitbucket.org/pierventre/srv6-controller.git
 
 The IP address of the server should be 2002::1. To this end, first find the interface name in the server machine:
 
@@ -32,83 +38,95 @@ Then Change the IP address of the selected interface in the Server
 
 ### How to perform the gRPC experiment ###
 
-In the Client machine, move in to the gRPC folder
+In the server machine, move in to the project: srv6-controller, folder: grpc.
+Open the grpc_server.py file. Change the value of "\_Device" variable to the proper <interface> of the device.
+Run the servers in two different terminals:
 
-    cd gRPC/
+    sudo python grpc_server.py -s (secure)
+    sudo python grpc_server.py
+    
+In the client machine, move in to project: srv6-southbound-api-evaluation, folder: grpc. 
+Open measure_grpc_client.py and adjust "ServerIP, \_Device, \_NumberOfRuleToBeEnforced, \_N_Experiment"  parameters. 
+Select the connection type by setting "SECURE" parameter in the file. if you choose "True" then the client will make secured connections otherwise insecure connections. 
+Then run the file:
 
-Open the A_gRPC_20Times.py file
+    sudo python measure_grpc_client.py
 
-    nano A_gRPC_20Times.py
-
-Change the value of "_Device" variable to the selected <interface> in step 7. Now press ctrl+o and then ctrl+x
-In the server machine, to gRPC folder and run the gRPC servers.
-
-    sudo python Server_gRPC_Shell.py secure
-    sudo python Server_gRPC_Shell.py insecure
-    sudo python NullServer_gRPC.py secure
-    sudo python NullServer_gRPC.py insecure
-
-In the client machine, run A_gRPC_20Times.py  
-
-    sudo python A_gRPC_20Times.py
-
-After the execution is finished the results of the Full process and Just communication parts (with and without packet loss and delay) will be in the gRPC/PureResults folder
+After the execution is finished the results will be in project: srv6-southbound-api-evaluation, file: grpc/gRPC20.txt
 
 ### How to perform the REST experiment ###
 
-In the Client machine, move in to the REST folder
+In the server machine, move in to project: srv6-controller, folder: rest. 
+Open the rest_server.py file. Change the value of "\_Device" variable to the proper <interface> of the device.
+Run the servers in two different terminals:
 
-    cd REST/
+    sudo python rest_server.py -s (secure)
+    sudo python rest_server.py
+   
+In the client machine, move in to project: srv6-southbound-api-evaluation, folder: rest. 
+Open measure_rest_client.py and adjust "ServerIP, \_Device, \_NumberOfRuleToBeEnforced, \_N_Experiment"  parameters. 
+Select the connection type by setting "SECURE" parameter in the file. if you choose "True" then the client will make secured connections otherwise insecure connections. 
+Then run the file:
 
-Open the A_REST_20Times.py file
+    sudo python measure_rest_client.py
 
-    nano A_REST_20Times.py
-
-Change the value of "_Device" variable to the selected <interface> in step 7. Now press ctrl+o and then ctrl+x
-In the server machine, to REST folder and run the REST servers.
-
-    sudo python Server_REST_Shell.py secure
-    sudo python Server_REST_Shell.py insecure
-    sudo python NullServer_REST.py secure
-    sudo python NullServer_REST.py insecure
-
-In the client machine, run A_REST_20Times.py
-
-    sudo python A_REST_20Times.py
-
-After the execution is finished the results of the Full process and Just communication parts (with and without packet loss and delay) will be in the REST/PureResults folder
+After the execution is finished the results will be in project: srv6-southbound-api-evaluation, file: rest/REST20.txt
 
 ### How to perform the SSH experiment ###
 
-In the Client machine, move in to the SSH folder
+In the server machine, move in to project: srv6-controller, folder: ssh. 
+Open the ssh_server.py file. Change the value of "\_Device" variable to the proper <interface> of the device.
+Run the servers in two different terminals:
 
-    cd SSH/
+    sudo python ssh_server.py
+   
+In the client machine, move in to project: srv6-southbound-api-evaluation, folder:  ssh. 
+Open measure_ssh_client.py and adjust "ServerIP, \_Device, \_NumberOfRuleToBeEnforced, \_N_Experiment"  parameters. 
+Then run the file:
 
-Open the A_SSH_20Times.py file
-    
+    sudo python measure_ssh_client.py
 
-    nano A_SSH_20Times.py
+After the execution is finished the results will be in project: srv6-southbound-api-evaluation, file: ssh/SSH20.txt
 
-Change the value of "_Device" variable to the selected <interface> in step 7. Now press ctrl+o and then ctrl+x
-In the client machine, run A_REST_20Times.py
+### How to perform the NETCONF experiment ###
 
-    sudo python A_SSH_20Times.py
+In the server machine, move in to project: srv6-controller, folder: netconf. 
+Open the netconf_server.py file. Change the value of "\_Device" variable to the proper <interface> of the device.
+Run the servers in two different terminals:
 
-After the execution is finished the results of the Full process and Just communication parts (with and without packet loss and delay) will be in the SSH/PureResults folder
+    sudo python netconf_server.py
+   
+In the client machine, move in to project: srv6-southbound-api-evaluation, folder: netconf. 
+Open measure_netconf_client.py and adjust "ServerIP, \_Device, \_NumberOfRuleToBeEnforced, \_N_Experiment"  parameters. 
+Then run the file:
+
+    sudo python measure_netconf_client.py
+
+After the execution is finished the results will be in project: srv6-southbound-api-evaluation, file: netconf/netconf20.txt
 
 ### How to perform the pyroute2 and shell experiments ###
 
-In the server, move in to the LocalRuleEnforcement folder
+In the server, move in to project: srv6-southbound-api-evaluation, folder: LocalRuleEnforcement.
+Open the Pyroute2_LRE.py  Shell_LRE.py files. Change the value of "\_Device" variable to the proper <interface> of the device.
+Run the codes:
 
-    cd LocalRuleEnforcement/
+    sudo python Pyroute2_LRE.py
+    sudo python Shell_LRE.py
 
-Open A_LocalRuleEnforcement_20Times.py
+After the execution is finished the results will be in project: srv6-southbound-api-evaluation, file: LocalRuleEnforcement/LocalRuleEnforcement20.txt
 
-    nano A_LocalRuleEnforcement_20Times.py
+### How to Measure the CPU usage ###
+Move in to project: srv6-southbound-api-evaluation, folder: cpu-measurements. 
+Run the plot-cpu.py code:
 
-Change the value of "_Device" variable to the selected <interface> in step 7. Now press ctrl+o and then ctrl+x
-In the server, run A_LocalRuleEnforcement_20Times.py
+    sudo python plot-cpu.py
 
-    sudo python A_LocalRuleEnforcement_20Times.py
+By pressing the ctrl+c the measurement will be stopped. Press these keys exactly one time (not more than that)
 
-After the execution is finished the results of the Full process and Just communication parts (with and without packet loss and delay) will be in the LocalRuleEnforcement folder
+### How to Measure the Memory usage ###
+Move in to project: srv6-southbound-api-evaluation, folder: memory-measurement. 
+Run the monitor.sh code:
+
+    sudo bash ./monitor.sh
+
+By pressing the ctrl+c the measurement will be stopped. Press these keys exactly one time (not more than that)

@@ -6,8 +6,6 @@ import json, psutil,time
 import srv6_explicit_path_pb2_grpc
 import srv6_explicit_path_pb2
 
-# Define wheter to use SSL or not
-SECURE = True
 # SSL cerificate for server validation
 CERTIFICATE = 'server.crt'
 
@@ -20,8 +18,12 @@ _Prefix = ''
 _Segments = '2000::1e'
 _NumberOfRuleToBeEnforced = 100
 _N_Experiment = 20
+# Define wheter to use SSL or not
+SECURE = False
 _Port = 1234
 
+_Bulk_Delete_Only = True
+#_Put_DelayAndPacketLoss_By_File = True
 
 # Build a grpc stub
 def get_grpc_session(ip_address, port, secure):
@@ -162,122 +164,109 @@ def delete(communicationType):
 
 if __name__ == '__main__':
     f1 = open('gRPC20.txt','a+')
-    #Add Operation
+
+    ##################################################################
+    #Add Operation - non persistent sequential Connection (NP-Con-Seq)    
     for i in range(1,_N_Experiment+1):
         _Prefix = str(2000+i) + '::'
         psutil.cpu_percent(interval=None, percpu=False)
         start_time = time.time()
-
         add("non persistent sequential")
-
         executionTime=time.time() - start_time
         SystemCPUUsage = psutil.cpu_percent(interval=None, percpu=False)*executionTime
-
         print("non persistent sequential, gRPC , Add "+str(i))
         print("Execution time: " + str(executionTime))
         print("System-wide CPU Usage: " + str(SystemCPUUsage))
-
         f1.write('non persistent sequential, gRPC , add:\n')
         f1.write(str(executionTime) + '\n')
         f1.write(str(SystemCPUUsage) + '\n')
+    #Delete Operation - non persistent sequential Connection (NP-Con-Seq)
+    if _Bulk_Delete_Only:
+        for i in range(1,_N_Experiment+1):
+            _Prefix = str(2000+i) + '::'
+            psutil.cpu_percent(interval=None, percpu=False)
+            start_time = time.time()
+            delete("non persistent sequential")
+            executionTime=time.time() - start_time
+            SystemCPUUsage = psutil.cpu_percent(interval=None, percpu=False)*executionTime
+            print("non persistent sequential, gRPC , del "+str(i))
+            print("Execution time: " + str(executionTime))
+            print("System-wide CPU Usage: " + str(SystemCPUUsage))
+            f1.write('non persistent sequential, gRPC , del:\n')
+            f1.write(str(executionTime) + '\n')
+            f1.write(str(SystemCPUUsage) + '\n')
+    else:
+        for i in range(1,_N_Experiment+1):
+            _Prefix = str(2000+i) + '::'
+            delete("non persistent bulk")
 
-
-    """for i in range(1,_N_Experiment+1):
-    	_Prefix = str(2000+i) + '::'
-    	delete("non persistent bulk")"""
-
-
+    ##################################################################
+    #Add Operation - non persistent bulk (NP-Bulk)
     for i in range(1,_N_Experiment+1):
         _Prefix = str(2000+i) + '::'
         psutil.cpu_percent(interval=None, percpu=False)
         start_time = time.time()
-
-        delete("non persistent sequential")
-
-        executionTime=time.time() - start_time
-        SystemCPUUsage = psutil.cpu_percent(interval=None, percpu=False)*executionTime
-
-        print("non persistent sequential, gRPC , del "+str(i))
-        print("Execution time: " + str(executionTime))
-        print("System-wide CPU Usage: " + str(SystemCPUUsage))
-
-        f1.write('non persistent sequential, gRPC , del:\n')
-        f1.write(str(executionTime) + '\n')
-        f1.write(str(SystemCPUUsage) + '\n')
-
-    for i in range(1,_N_Experiment+1):
-        _Prefix = str(2000+i) + '::'
-        psutil.cpu_percent(interval=None, percpu=False)
-        start_time = time.time()
-
         add("non persistent bulk")
-
         executionTime=time.time() - start_time
         SystemCPUUsage = psutil.cpu_percent(interval=None, percpu=False)*executionTime
-
         print("non persistent bulk, gRPC , Add "+str(i))
         print("Execution time: " + str(executionTime))
         print("System-wide CPU Usage: " + str(SystemCPUUsage))
-
         f1.write('non persistent bulk, gRPC , add:\n')
         f1.write(str(executionTime) + '\n')
         f1.write(str(SystemCPUUsage) + '\n')
+    #Delete Operation - non persistent bulk (NP-Bulk)
+    if _Bulk_Delete_Only:
+        for i in range(1,_N_Experiment+1):
+            _Prefix = str(2000+i) + '::'
+            psutil.cpu_percent(interval=None, percpu=False)
+            start_time = time.time()
+            delete("non persistent bulk")
+            executionTime=time.time() - start_time
+            SystemCPUUsage = psutil.cpu_percent(interval=None, percpu=False)*executionTime
+            print("non persistent bulk, gRPC , del "+str(i))
+            print("Execution time: " + str(executionTime))
+            print("System-wide CPU Usage: " + str(SystemCPUUsage))
+            f1.write('non persistent bulk, gRPC , del:\n')
+            f1.write(str(executionTime) + '\n')
+            f1.write(str(SystemCPUUsage) + '\n')
+    else:
+        for i in range(1,_N_Experiment+1):
+            _Prefix = str(2000+i) + '::'
+            delete("non persistent bulk")
 
+    ##################################################################
+    #Add Operation - persistent Conncection (P-Con_Seq)
     for i in range(1,_N_Experiment+1):
         _Prefix = str(2000+i) + '::'
         psutil.cpu_percent(interval=None, percpu=False)
         start_time = time.time()
-
-        delete("non persistent bulk")
-
-        executionTime=time.time() - start_time
-        SystemCPUUsage = psutil.cpu_percent(interval=None, percpu=False)*executionTime
-
-        print("non persistent bulk, gRPC , del "+str(i))
-        print("Execution time: " + str(executionTime))
-        print("System-wide CPU Usage: " + str(SystemCPUUsage))
-
-        f1.write('non persistent bulk, gRPC , del:\n')
-        f1.write(str(executionTime) + '\n')
-        f1.write(str(SystemCPUUsage) + '\n')
-
-    for i in range(1,_N_Experiment+1):
-        _Prefix = str(2000+i) + '::'
-        psutil.cpu_percent(interval=None, percpu=False)
-        start_time = time.time()
-
         add("persistent Conncection")
-
         executionTime=time.time() - start_time
         SystemCPUUsage = psutil.cpu_percent(interval=None, percpu=False)*executionTime
-
         print("persistent Conncection, gRPC , Add "+str(i))
         print("Execution time: " + str(executionTime))
         print("System-wide CPU Usage: " + str(SystemCPUUsage))
-
         f1.write('persistent Conncection, gRPC , add:\n')
         f1.write(str(executionTime) + '\n')
         f1.write(str(SystemCPUUsage) + '\n')
-
-    for i in range(1,_N_Experiment+1):
-        _Prefix = str(2000+i) + '::'
-        psutil.cpu_percent(interval=None, percpu=False)
-        start_time = time.time()
-
-        delete("persistent Conncection")
-
-        executionTime=time.time() - start_time
-        SystemCPUUsage = psutil.cpu_percent(interval=None, percpu=False)*executionTime
-
-        print("persistent Conncection, gRPC , del "+str(i))
-        print("Execution time: " + str(executionTime))
-        print("System-wide CPU Usage: " + str(SystemCPUUsage))
-
-        f1.write('persistent Conncection, gRPC , del:\n')
-        f1.write(str(executionTime) + '\n')
-        f1.write(str(SystemCPUUsage) + '\n')
-
-
-    """for i in range(1,_N_Experiment+1):
-    	_Prefix = str(2000+i) + '::'
-    	delete("non persistent bulk")"""
+    #Delete Operation - persistent Conncection (P-Con_Seq)
+    if _Bulk_Delete_Only:
+        for i in range(1,_N_Experiment+1):
+            _Prefix = str(2000+i) + '::'
+            psutil.cpu_percent(interval=None, percpu=False)
+            start_time = time.time()
+            delete("persistent Conncection")
+            executionTime=time.time() - start_time
+            SystemCPUUsage = psutil.cpu_percent(interval=None, percpu=False)*executionTime
+            print("persistent Conncection, gRPC , del "+str(i))
+            print("Execution time: " + str(executionTime))
+            print("System-wide CPU Usage: " + str(SystemCPUUsage))
+            f1.write('persistent Conncection, gRPC , del:\n')
+            f1.write(str(executionTime) + '\n')
+            f1.write(str(SystemCPUUsage) + '\n')
+    else:
+        for i in range(1,_N_Experiment+1):
+        	_Prefix = str(2000+i) + '::'
+        	delete("non persistent bulk")
+    f1.close()
